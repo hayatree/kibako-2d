@@ -1,0 +1,43 @@
+# kibako
+
+Open, **commercially usable** generative models for 2D game assets.
+
+Every model in this repository is built so that you can use its outputs in a commercial game:
+
+- **Base models** are released under permissive licenses (e.g. Apache-2.0).
+- **Training data** is limited to CC0 assets and original work. Each image's source and license is recorded in a provenance manifest, which is published together with the dataset.
+- **LoRA weights** are released under Apache-2.0.
+
+See [docs/licensing.md](docs/licensing.md) for the full policy.
+
+> Status: early development. Nothing has been released yet.
+
+## Models
+
+| Model | Base | Assets | Status |
+|---|---|---|---|
+| [items-klein4b](models/items-klein4b/) | FLUX.2 [klein] 4B | Item and icon sprites (weapons, potions, UI icons) | planned |
+
+## Repository layout
+
+```
+src/kibako/     shared tooling (data sources, provenance manifest, captioning, post-processing, evaluation, Hub upload)
+models/<name>/  one directory per model = one Hugging Face model repo (dataset recipe, manifest, training config, model card)
+spaces/<name>/  one directory per Hugging Face Space
+workflows/      ComfyUI workflows
+docs/           project documentation
+```
+
+Weights and images live on Hugging Face, not in git. This repository holds everything needed to reproduce them.
+
+## Development
+
+```sh
+uv sync
+uv run pytest
+uv run python -m kibako.manifest check models/<name>/manifest.jsonl
+```
+
+## License
+
+Code: [Apache-2.0](LICENSE). Model weights and datasets: see each model card.

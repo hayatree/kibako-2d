@@ -1,0 +1,80 @@
+"""Provenance manifest for training images.
+
+Every training image must have one manifest entry recording where it came from
+and under which license. `check` refuses any license outside ALLOWED_LICENSES,
+so a dataset that passes can be published as safe for commercial use.
+
+Usage:
+    python -m kibako.manifest check models/<model>/manifest.jsonl
+"""
+
+from __future__ import annotations
+
+import json
+import re
+import sys
+from dataclasses import dataclass
+from pathlib import Path
+
+# SPDX identifiers (or LicenseRef-*) that allow unrestricted commercial use
+# without attribution. Anything else is rejected.
+ALLOWED_LICENSES = frozenset(
+    {
+        "CC0-1.0",
+        "LicenseRef-own-work",  # created by the maintainers, released under CC0
+    }
+)
+
+REQUIRED_FIELDS = ("sha256", "path", "source", "source_url", "license")
+SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
+
+
+@dataclass(frozen=True)
+class Entry:
+    sha256: str  # hash of the image file
+    path: str  # path relative to the dataset root
+    source: str  # e.g. "kenney"
+    source_url: str  # page the asset was downloaded from
+    license: str  # SPDX identifier
+    author: str = ""
+
+
+def load(path: Path) -> list[dict]:
+    with open(path, encoding="utf-8") as f:
+        return [json.loads(line) for line in f if line.strip()]
+
+
+def validate(records: list[dict]) -> list[str]:
+    """Return a list of human-readable errors; empty means the manifest is valid."""
+    errors: list[str] = []
+    seen_hash: dict[str, int] = {}
+    seen_path: dict[str, int] = {}
+    for i, rec in enumerate(records, start=1):
+        missing = [k for k in REQUIRED_FIELDS if not rec.get(k)]
+        if missing:
+            errors.append(f"line {i}: missing {', '.join(missing)}")
+            continue
+        if rec["license"] not in ALLOWED_LICENSES:
+            errors.append(f"line {i}: license {rec['license']!r} is not allowed ({rec['path']})")
+        if not SHA256_RE.match(rec["sha256"]):
+            errors.append(f"line {i}: sha256 is not a lowercase hex digest")
+        for key, seen in (("sha256", seen_hash), ("path", seen_path)):
+            if rec[key] in seen:
+                errors.append(f"line {i}: duplicate {key} (first seen on line {seen[rec[key]]})")
+            else:
+                seen[rec[key]] = i
+    return errors
+
+
+def main(argv: list[str]) -> int:
+    if len(argv) != 2 or argv[0] != "check":
+        print(__doc__, file=sys.stderr)
+        return 2
+    errors = validate(load(Path(argv[1])))
+    for e in errors:
+        print(e, file=sys.stderr)
+    return 1 if errors else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))

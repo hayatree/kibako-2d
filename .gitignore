@@ -1,0 +1,12 @@
+# Data and training outputs are published on Hugging Face, not in git
+data/
+outputs/
+
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
