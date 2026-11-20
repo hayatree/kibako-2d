@@ -1,0 +1,176 @@
+# Items used to build the training set (generated with FLUX.2 [klein] 4B, Apache-2.0).
+# Generic items only: no names of existing characters, brands or franchises.
+#
+# The caption of each training image is the item name alone. The style comes
+# from the prompt template at generation time, so the LoRA learns to produce the
+# icon style from the bare item name.
+
+generator: black-forest-labs/FLUX.2-klein-4B
+template: "game item icon of {item}, single object, centered, plain white background"
+seeds: [0, 1, 2, 3]
+width: 1024
+height: 1024
+steps: 4
+guidance: 1.0
+
+categories:
+  melee_weapons:
+    - an iron sword
+    - a steel longsword
+    - a curved scimitar
+    - a short dagger
+    - a battle axe
+    - a double-bladed axe
+    - a spiked mace
+    - a war hammer
+    - a wooden club
+    - a long spear
+    - a halberd
+    - a katana
+    - a rapier
+    - a golden trident
+    - a flail with a spiked ball
+    - a wooden practice sword
+  ranged_weapons:
+    - a wooden bow
+    - a longbow
+    - a crossbow
+    - a sling
+    - a quiver of arrows
+    - a throwing knife
+    - a boomerang
+    - a magic wand
+    - a magic staff with a glowing crystal
+    - a wooden staff
+  armor:
+    - a wooden round shield
+    - a steel kite shield
+    - a knight helmet
+    - a horned viking helmet
+    - a leather cap
+    - a chainmail shirt
+    - a steel breastplate
+    - a leather armor vest
+    - leather boots
+    - steel gauntlets
+    - leather gloves
+    - a hooded cloak
+    - a wizard hat
+    - a golden crown
+    - a leather belt
+  accessories:
+    - a magic ring
+    - a golden ring with a red gem
+    - a silver necklace with a blue gem
+    - a pendant amulet
+    - a pair of earrings
+    - a golden bracelet
+    - a brooch
+    - a medal
+    - a feather charm
+    - a lucky coin
+  potions:
+    - a red health potion
+    - a blue mana potion
+    - a green poison bottle
+    - a yellow stamina potion
+    - a purple elixir
+    - a large flask with swirling liquid
+    - a small vial with a cork
+    - an empty glass bottle
+    - a pink love potion
+    - a black potion in a round bottle
+  food:
+    - a roasted meat on the bone
+    - a green apple
+    - a red apple
+    - a loaf of bread
+    - a wedge of cheese
+    - a fish
+    - a bunch of grapes
+    - a carrot
+    - a mushroom
+    - a slice of cake
+    - a bowl of soup
+    - a mug of ale
+    - a wine bottle
+    - an egg
+    - a pumpkin
+  treasure:
+    - a pile of gold coins
+    - a single gold coin
+    - a treasure chest
+    - an open treasure chest full of gold
+    - a purple gem
+    - a green emerald
+    - a blue sapphire
+    - a red ruby
+    - a diamond
+    - a gold bar
+    - a crystal
+    - a pearl
+    - a golden goblet
+    - a money bag
+  tools:
+    - an old key
+    - a golden key
+    - a pickaxe
+    - a shovel
+    - a wood axe
+    - a fishing rod
+    - a hammer
+    - a saw
+    - a lantern
+    - a torch
+    - a compass
+    - a rope coil
+    - a backpack
+    - a pair of scissors
+    - a wooden bucket
+    - a spyglass
+    - a padlock
+  magic_and_books:
+    - a rolled scroll
+    - a spell book
+    - an open book
+    - a crystal ball
+    - a skull
+    - a candle
+    - a feather quill and ink bottle
+    - a rune stone
+    - a magic orb
+    - a tarot card
+    - a bone
+    - a hourglass
+  materials:
+    - a wooden log
+    - a stone
+    - an iron ingot
+    - a lump of coal
+    - a bundle of herbs
+    - a four-leaf clover
+    - a feather
+    - a cloth roll
+    - a leather hide
+    - a spider web
+    - a bag of flour
+    - a pile of sand
+    - a flower
+    - a seed pouch
+  misc:
+    - a round bomb with a fuse
+    - a dynamite stick
+    - a map
+    - a letter with a wax seal
+    - a heart
+    - a star
+    - a shield-shaped badge
+    - a flag
+    - a horn
+    - a drum
+    - a lute
+    - a mirror
+    - a heart-shaped locket
+    - a dice
+    - a trophy cup
+    - a bell

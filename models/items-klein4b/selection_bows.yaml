@@ -1,0 +1,21 @@
+# Bows, from the procedural sketches (items_bows.yaml). Chosen by variant id because the
+# candidates share a seed. Left out: sketches where the model added handles, sticks or arrows.
+a wooden bow:
+  - a-wooden-bow__simple_-20_0__s0
+  - a-wooden-bow__simple_-20_1__s0
+  - a-wooden-bow__simple_-35_0__s0
+  - a-wooden-bow__simple_-35_1__s0
+  - a-wooden-bow__simple_0_0__s0
+  - a-wooden-bow__simple_0_1__s0
+a longbow:
+  - a-longbow__long_-20_0__s0
+  - a-longbow__long_-20_1__s0
+  - a-longbow__long_-35_1__s0
+  - a-longbow__long_0_0__s0
+  - a-longbow__long_0_1__s0
+a recurve bow:
+  - a-recurve-bow__recurve_-35_0__s0
+  - a-recurve-bow__recurve_-35_1__s0
+  - a-recurve-bow__recurve_-50_0__s0
+  - a-recurve-bow__recurve_-50_1__s0
+  - a-recurve-bow__recurve_0_0__s0

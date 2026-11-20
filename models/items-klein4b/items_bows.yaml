@@ -1,0 +1,21 @@
+# Bows. FLUX.2 [klein] 4B cannot draw them from a prompt (sticks, or an arrow through a symmetric
+# diamond). The shape is given as a procedural sketch (kibako.sketch) and the model renders it in
+# the icon style. The caption is the short item name.
+generator: black-forest-labs/FLUX.2-klein-4B
+template: "game item icon of {item}, single object, centered, plain white background"
+category: ranged_weapons
+width: 1024
+height: 1024
+steps: 4
+guidance: 1.0
+
+sketch:
+  function: bow
+  tilts: [-50, -35, -20, 0]   # positive tilts made the model add handles and arrows
+  flips: [false, true]
+  seeds: [0, 1]
+
+items:
+  a wooden bow: simple
+  a longbow: long
+  a recurve bow: recurve

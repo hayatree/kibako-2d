@@ -1,0 +1,42 @@
+# Fixed evaluation prompts for items-klein4b.
+# The same prompts and seeds are run on the base model and on every LoRA
+# checkpoint, so results can be compared side by side.
+#
+# Each prompt is rendered once per template. "{item}" is replaced by the item.
+
+seeds: [1, 2]
+width: 1024
+height: 1024
+
+templates:
+  # What a user would type without any prompt engineering.
+  plain: "{item}"
+  # Explicit icon framing, to see how far the base model gets on its own.
+  icon: "game item icon of {item}, single object, centered, plain white background"
+
+items:
+  # weapons
+  - an iron sword
+  - a battle axe
+  - a wooden bow
+  - a magic staff with a glowing crystal
+  # armor
+  - a wooden round shield
+  - a knight helmet
+  - leather boots
+  # consumables
+  - a red health potion
+  - a blue mana potion
+  - a roasted meat on the bone
+  - a green apple
+  # treasure
+  - a pile of gold coins
+  - a treasure chest
+  - a purple gem
+  - a magic ring
+  # misc
+  - an old key
+  - a rolled scroll
+  - a spell book
+  - a round bomb with a fuse
+  - a fishing rod
