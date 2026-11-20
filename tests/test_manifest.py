@@ -38,3 +38,29 @@ def test_rejects_duplicate_hash_and_path():
 
 def test_rejects_malformed_hash():
     assert any("sha256" in e for e in validate([rec(sha256="xyz")]))
+
+
+SYNTH = {
+    "license": "LicenseRef-synthetic-apache-2.0",
+    "source": "synthetic",
+    "source_url": "https://huggingface.co/black-forest-labs/FLUX.2-klein-4B",
+    "generator": "black-forest-labs/FLUX.2-klein-4B",
+    "generator_revision": "e7b7dc27f91deacad38e78976d1f2b499d76a294",
+    "prompt": "game item icon of an iron sword",
+    "seed": 0,
+}
+
+
+def test_synthetic_image_with_generation_record_is_valid():
+    assert validate([rec(**SYNTH)]) == []
+
+
+def test_synthetic_image_requires_generation_record():
+    for field in ("generator", "generator_revision", "prompt", "seed"):
+        bad = {k: v for k, v in SYNTH.items() if k != field}
+        errors = validate([rec(**bad)])
+        assert errors == [f"line 1: synthetic image is missing {field}"], field
+
+
+def test_synthetic_seed_zero_counts_as_present():
+    assert validate([rec(**{**SYNTH, "seed": 0})]) == []

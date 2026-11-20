@@ -9,6 +9,8 @@ dependencies = []
 
 [dependency-groups]
 dev = ["pytest>=8"]
+# Image generation (evaluation). Training uses ai-toolkit in its own environment.
+gen = ["torch>=2.13", "diffusers", "transformers", "accelerate", "pyyaml", "pillow"]
 
 [build-system]
 requires = ["hatchling"]
