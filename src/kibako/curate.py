@@ -8,7 +8,7 @@ Usage:
 check   writes checked.jsonl next to candidates.jsonl, adding `auto_ok` and `reasons`.
         Images that fail are never offered for selection.
 sheets  writes one contact sheet per group of items, four seeds per row.
-build   copies the selected images into DATASET_DIR together with <name>.txt captions
+build   copies the selected images into DATASET_DIR (which must be new or empty) together with <name>.txt captions
         (the item name alone) and a manifest.jsonl that passes `kibako.manifest check`.
 
 SELECTION.yaml maps an item name to the list of seeds to keep:
@@ -107,6 +107,9 @@ def cmd_sheets(raw: Path, out: Path, per_sheet: int, cell: int = 200) -> None:
 def cmd_build(raw: Path, selection: Path, dataset: Path) -> None:
     chosen = yaml.safe_load(selection.read_text()) or {}
     checked = {(r["item"], r.get("variant") or r["seed"]): r for r in read_jsonl(raw / "checked.jsonl")}
+    if dataset.exists() and any(dataset.iterdir()):
+        # Old files would stay in the training folder without a manifest entry.
+        sys.exit(f"{dataset} is not empty; build into a new folder")
     dataset.mkdir(parents=True, exist_ok=True)
     manifest = []
     for item, seeds in chosen.items():

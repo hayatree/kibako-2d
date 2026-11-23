@@ -54,7 +54,7 @@ config:
         seed: 42
         walk_seed: false
         neg: ""
-        # Bare item names, as a user would type them. The last four are NOT in the training set.
+        # Bare item names, as a user would type them. Only the bow, the pocket watch and the cupcake are NOT in the training set.
         prompts:
           - "an iron sword"
           - "a red health potion"

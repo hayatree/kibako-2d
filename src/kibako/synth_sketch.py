@@ -39,7 +39,7 @@ def main() -> None:
     cfg = yaml.safe_load(args.items.read_text())
     model = cfg["generator"]
     revision = revision_of(model)
-    pipe = Flux2KleinPipeline.from_pretrained(model, torch_dtype=torch.bfloat16).to("cuda")
+    pipe = Flux2KleinPipeline.from_pretrained(model, revision=revision, torch_dtype=torch.bfloat16).to("cuda")
 
     args.out.mkdir(parents=True, exist_ok=True)
     log = args.out / "candidates.jsonl"

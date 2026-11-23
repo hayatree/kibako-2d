@@ -86,7 +86,7 @@ a crystal: [0, 2]
 a pearl: [0, 2]
 a golden goblet: [0, 2]
 a money bag: [0, 2]
-# tools (left out: "a pickaxe" came out as a double axe, "a fishing rod" failed the automatic check)
+# tools (left out: "a pickaxe" came out as a double axe, "a fishing rod" failed the automatic check used at the time, which required 4% subject area; see curate.MIN_EXTENT)
 an old key: [0, 2]
 a golden key: [0, 1]
 a shovel: [0, 1]

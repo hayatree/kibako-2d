@@ -49,6 +49,20 @@ def test_build_produces_valid_manifest_and_captions(tmp_path):
     assert validate(curate.read_jsonl(ds / "manifest.jsonl")) == []
 
 
+def test_build_refuses_a_non_empty_dataset_dir(tmp_path):
+    # Rebuilding into an old folder would leave images that are not in the new manifest.
+    raw, ds = tmp_path / "raw", tmp_path / "ds"
+    raw.mkdir()
+    (raw / "checked.jsonl").write_text("")
+    ds.mkdir()
+    (ds / "stale__s0.png").write_bytes(b"x")
+    sel = tmp_path / "sel.yaml"
+    sel.write_text("{}\n")
+    with pytest.raises(SystemExit):
+        curate.cmd_build(raw, sel, ds)
+    assert not (ds / "manifest.jsonl").exists()
+
+
 def test_build_refuses_images_that_failed_the_check(tmp_path):
     raw = tmp_path / "raw"
     raw.mkdir()
